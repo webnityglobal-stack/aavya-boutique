@@ -45,9 +45,7 @@ export default function App() {
   const addToCart = (product) => {
     const size = product.selectedSize || "M";
     const cartKey = `${product.id}-${size}`;
-    const handleOrderPlaced = () => {
-  setCart([]);
-};
+
 
     setCart((items) => {
       const existing = items.find(
@@ -74,6 +72,11 @@ export default function App() {
     });
   };
 
+  const handleOrderPlaced = () => {
+    setCart([]);
+  };
+
+
   // Update quantity
   const updateQuantity = (cartKey, change) => {
     setCart((items) =>
@@ -81,9 +84,9 @@ export default function App() {
         .map((item) =>
           item.cartKey === cartKey
             ? {
-                ...item,
-                quantity: Math.max(1, item.quantity + change),
-              }
+              ...item,
+              quantity: Math.max(1, item.quantity + change),
+            }
             : item
         )
     );
@@ -141,19 +144,19 @@ export default function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route
-  path="/checkout"
-  element={
-    <Checkout
-      cart={cart}
-      onOrderPlaced={handleOrderPlaced}
-    />
-  }
-/>
+          path="/checkout"
+          element={
+            <Checkout
+              cart={cart}
+              onOrderPlaced={handleOrderPlaced}
+            />
+          }
+        />
 
-<Route
-  path="/order-success"
-  element={<OrderSuccess />}
-/>
+        <Route
+          path="/order-success"
+          element={<OrderSuccess />}
+        />
 
         <Route
           path="*"
