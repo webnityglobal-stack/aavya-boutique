@@ -15,6 +15,8 @@ import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import ProductDetails from "./pages/ProductDetails";
 import Bag from "./pages/Bag";
+import Checkout from "./pages/Checkout";
+import OrderSuccess from "./pages/OrderSuccess";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -43,6 +45,9 @@ export default function App() {
   const addToCart = (product) => {
     const size = product.selectedSize || "M";
     const cartKey = `${product.id}-${size}`;
+    const handleOrderPlaced = () => {
+  setCart([]);
+};
 
     setCart((items) => {
       const existing = items.find(
@@ -135,6 +140,20 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
+        <Route
+  path="/checkout"
+  element={
+    <Checkout
+      cart={cart}
+      onOrderPlaced={handleOrderPlaced}
+    />
+  }
+/>
+
+<Route
+  path="/order-success"
+  element={<OrderSuccess />}
+/>
 
         <Route
           path="*"
